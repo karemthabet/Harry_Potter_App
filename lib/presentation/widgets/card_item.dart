@@ -2,6 +2,7 @@ import 'package:breaking_bad_api/data/models/character_model/character_model.dar
 import 'package:breaking_bad_api/presentation/utils/colors/app_colors.dart';
 import 'package:breaking_bad_api/presentation/utils/constants/app_constatns.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CardItem extends StatelessWidget {
   final CharacterModel characterModel;
@@ -10,7 +11,9 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, AppConstatns.characterDetailScreen, arguments: characterModel),
+      onTap: () => Navigator.pushNamed(
+          context, AppConstatns.characterDetailScreen,
+          arguments: characterModel),
       child: Hero(
         tag: characterModel.id!,
         child: Container(
@@ -31,18 +34,17 @@ class CardItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             child: GridTile(
               // ignore: sort_child_properties_last
-              child: characterModel.image?.isNotEmpty == true
-                  ? FadeInImage.assetNetwork(
-                      width: double.infinity,
-                      height: double.infinity,
-                      placeholder: "assets/images/Animation loading.gif",
-                      image: characterModel.image!,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.asset(
-                      "assets/images/Animation - 1739657573224.gif",
-                      fit: BoxFit.cover,
-                    ),
+              child: CachedNetworkImage(
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/Animation - 1739657573224.gif"),
+                width: double.infinity,
+                height: double.infinity,
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/Animation loading.gif"),
+                imageUrl: characterModel.image!,
+                fit: BoxFit.cover,
+              ),
+
               footer: Container(
                 padding: EdgeInsets.all(12.0),
                 color: Colors.black,

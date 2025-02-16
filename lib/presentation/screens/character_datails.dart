@@ -1,5 +1,6 @@
 import 'package:breaking_bad_api/data/models/character_model/character_model.dart';
 import 'package:breaking_bad_api/presentation/utils/colors/app_colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CharacterDatails extends StatelessWidget {
@@ -88,18 +89,16 @@ class CharacterDatails extends StatelessWidget {
         ),
         background: Hero(
           tag: character.id!,
-          child: character.image?.isNotEmpty == true
-              ? FadeInImage.assetNetwork(
-                  width: double.infinity,
-                  height: double.infinity,
-                  placeholder: "assets/images/Animation loading.gif",
-                  image: character.image!,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  "assets/images/Animation - 1739657573224.gif",
-                  fit: BoxFit.cover,
-                ),
+          child:  CachedNetworkImage(
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/Animation - 1739657573224.gif"),
+                width: double.infinity,
+                height: double.infinity,
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/Animation loading.gif"),
+                imageUrl: character.image!,
+                fit: BoxFit.cover,
+              ),
         ),
       ),
     );

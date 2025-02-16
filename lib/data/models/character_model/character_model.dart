@@ -1,26 +1,69 @@
-import 'package:equatable/equatable.dart';
+
+import 'package:hive/hive.dart';
 import 'wand.dart';
 
-class CharacterModel extends Equatable {
+part 'character_model.g.dart';
+
+@HiveType(typeId: 0)
+class CharacterModel {
+  @HiveField(0)
   final String? id;
+  
+  @HiveField(1)
   final String? name;
+  
+  @HiveField(2)
   final List<String>? alternateNames;
+  
+  @HiveField(3)
   final String? species;
+  
+  @HiveField(4)
   final String? gender;
+  
+  @HiveField(5)
   final String? house;
+  
+  @HiveField(6)
   final String? dateOfBirth;
+  
+  @HiveField(7)
   final int? yearOfBirth;
+  
+  @HiveField(8)
   final bool? wizard;
+  
+  @HiveField(9)
   final String? ancestry;
+  
+  @HiveField(10)
   final String? eyeColour;
+  
+  @HiveField(11)
   final String? hairColour;
+  
+  @HiveField(12)
   final Wand? wand;
+  
+  @HiveField(13)
   final String? patronus;
+  
+  @HiveField(14)
   final bool? hogwartsStudent;
+  
+  @HiveField(15)
   final bool? hogwartsStaff;
+  
+  @HiveField(16)
   final String? actor;
+  
+  @HiveField(17)
   final List<String>? alternateActors;
+  
+  @HiveField(18)
   final bool? alive;
+  
+  @HiveField(19)
   final String? image;
 
   const CharacterModel({
@@ -46,7 +89,12 @@ class CharacterModel extends Equatable {
     this.image,
   });
 
-  factory CharacterModel.fromJson(Map<String, dynamic> json) {
+  
+      
+
+
+  
+  factory CharacterModel.fromJson(dynamic json) {
     return CharacterModel(
       id: json['id'] as String?,
       name: json['name'] as String?,

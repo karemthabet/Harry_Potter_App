@@ -15,7 +15,8 @@ class ApiService {
   static const String baseUrl = 'https://hp-api.onrender.com/api/';
   static String token = '';
 
-  static Future<Either<Failure, List<dynamic>>> get({required String endPoint}) async {
+  static Future<Either<Failure, dynamic>> get(
+      {required String endPoint}) async {
     try {
       var response = await _dio.get(
         '$baseUrl$endPoint',
@@ -25,11 +26,8 @@ class ApiService {
           },
         ),
       );
-      if (response.data is List) {
-        return right(response.data as List<dynamic>);
-      } else {
-        return left(ServerFailure(errMessage: 'Invalid data format'));
-      }
+
+      return right(response.data);
     } catch (error) {
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));

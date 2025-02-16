@@ -1,11 +1,9 @@
 part of 'character_cubit.dart';
 
-abstract class CharacterState extends Equatable {
+abstract class CharacterState  {
   const CharacterState();
-
-  @override
-  List<Object> get props => [];
 }
+
 
 class CharacterInitial extends CharacterState {}
 
@@ -16,8 +14,6 @@ class CharacterSuccessState extends CharacterState {
 
   const CharacterSuccessState({required this.charactersList});
 
-  @override
-  List<Object> get props => [charactersList];
 }
 
 class CharacterErrorState extends CharacterState {
@@ -25,6 +21,4 @@ class CharacterErrorState extends CharacterState {
 
   const CharacterErrorState({required this.errMessage});
 
-  @override
-  List<Object> get props => [errMessage];
 }

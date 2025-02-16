@@ -1,8 +1,15 @@
-import 'package:equatable/equatable.dart';
 
-class Wand extends Equatable {
+import 'package:hive/hive.dart';
+
+part 'wand.g.dart';
+
+@HiveType(typeId: 1)
+class Wand  {
+  @HiveField(0)
   final String? wood;
+  @HiveField(1)
   final String? core;
+  @HiveField(2)
   final num? length;
 
   const Wand({this.wood, this.core, this.length});
@@ -19,6 +26,4 @@ class Wand extends Equatable {
         'length': length,
       };
 
-  @override
-  List<Object?> get props => [wood, core, length];
 }
